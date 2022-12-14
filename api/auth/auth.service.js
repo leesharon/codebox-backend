@@ -18,19 +18,6 @@ async function login(username, password) {
   return user
 }
 
-async function signup(username, password) {
-  const saltRounds = 10
-
-  logger.debug(`auth.service - signup with username: ${username}`)
-  if (!username || !password) return Promise.reject('username and password are required!')
-
-  const userExist = await userService.getByUsername(username)
-  if (userExist) return Promise.reject('Username already taken')
-
-  const hash = await bcrypt.hash(password, saltRounds)
-  return userService.add({ username, password: hash, isMentor: false })
-}
-
 function getLoginToken(user) {
   return cryptr.encrypt(JSON.stringify(user))
 }
@@ -47,7 +34,6 @@ function validateToken(loginToken) {
 }
 
 module.exports = {
-  signup,
   login,
   getLoginToken,
   validateToken,

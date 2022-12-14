@@ -1,13 +1,10 @@
 
 const dbService = require('../../services/db.service')
 const logger = require('../../services/logger.service')
-const ObjectId = require('mongodb').ObjectId
 
 module.exports = {
     query,
-    getById,
-    getByUsername,
-    add
+    getByUsername
 }
 
 async function query(filterBy) {
@@ -24,19 +21,6 @@ async function query(filterBy) {
     }
 }
 
-async function getById(userId) {
-    try {
-        const collection = await dbService.getCollection('user')
-        const user = await collection.findOne({ '_id': ObjectId(userId) })
-        delete user.password
-        delete user.createdAt
-        return user
-    } catch (err) {
-        logger.error(`while finding user ${userId}`, err)
-        throw err
-    }
-}
-
 async function getByUsername(username) {
     try {
         const collection = await dbService.getCollection('user')
@@ -47,18 +31,3 @@ async function getByUsername(username) {
         throw err
     }
 }
-
-async function add(user) {
-    try {
-        const { username, password, isMentor } = user
-        const userToAdd = { username, password, isMentor }
-        const collection = await dbService.getCollection('user')
-        await collection.insertOne(userToAdd)
-        return userToAdd
-    } catch (err) {
-        logger.error('cannot insert user', err)
-        throw err
-    }
-}
-
-
