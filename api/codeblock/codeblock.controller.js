@@ -2,6 +2,7 @@ const codeblockService = require("./codeblock.service.js")
 const logger = require("../../services/logger.service")
 // const { broadcast } = require("../../services/socket.service.js")
 const asyncLocalStorage = require("../../services/als.service.js")
+const { broadcast } = require('../../services/socket.service.js')
 
 module.exports = {
     getCodeblocks,
@@ -36,13 +37,13 @@ async function updateCodeblock(req, res) {
         const codeblock = req.body
         const updatedCodeblock = await codeblockService.update(codeblock)
 
-        // const loggedinUser = asyncLocalStorage.getStore().loggedinUser
-        // broadcast({
-        //     type: "update-codeblock",
-        //     data: { code: updatedCodeblock.code },
-        //     room: updatedCodeblock._id,
-        //     userId: loggedinUser?._id,
-        // })
+        const loggedinUser = asyncLocalStorage.getStore().loggedinUser
+        broadcast({
+            type: "update-codeblock",
+            data: { code: updatedCodeblock.code },
+            room: updatedCodeblock._id,
+            userId: loggedinUser?._id,
+        })
 
         res.json(updatedCodeblock)
     } catch (err) {
