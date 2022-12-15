@@ -36,13 +36,13 @@ async function updateCodeblock(req, res) {
         const codeblock = req.body
         const updatedCodeblock = await codeblockService.update(codeblock)
 
-        const loggedinUser = asyncLocalStorage.getStore().loggedinUser
-        broadcast({
-            type: "update-codeblock",
-            data: { code: updatedCodeblock.code },
-            room: updatedCodeblock._id,
-            userId: loggedinUser?._id,
-        })
+        // const loggedinUser = asyncLocalStorage.getStore().loggedinUser
+        // broadcast({
+        //     type: "update-codeblock",
+        //     data: { code: updatedCodeblock.code },
+        //     room: updatedCodeblock._id,
+        //     userId: loggedinUser?._id,
+        // })
 
         res.json(updatedCodeblock)
     } catch (err) {
