@@ -5,6 +5,4 @@ async function log(req, res, next) {
   next()
 }
 
-module.exports = {
-  log
-}
+module.exports = { log }

@@ -13,6 +13,4 @@ async function add(session) {
     }
 }
 
-module.exports = {
-    add
-}
+module.exports = { add }

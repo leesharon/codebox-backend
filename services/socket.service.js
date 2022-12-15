@@ -6,9 +6,11 @@ function setupSocketAPI(http) {
   gIo = require('socket.io')(http, { cors: { origin: '*' } })
   gIo.on('connection', (socket) => {
     logger.info(`New connected socket [id: ${socket.id}]`)
+
     socket.on('disconnect', (socket) => {
       logger.info(`Socket disconnected [id: ${socket.id}]`)
     })
+
     socket.on('join-codeblock', (codeblockId) => {
       if (socket.myCodeblockId === codeblockId) return
       if (socket.myCodeblockId) {
@@ -19,34 +21,10 @@ function setupSocketAPI(http) {
       socket.myCodeblockId = codeblockId
       logger.info(`Socket is now on codeblock ${socket.myCodeblockId} [id: ${socket.id}]`)
     })
-    socket.on('board-change', (board) => {
-      logger.info(`Updated board from socket [id: ${socket.id}], emitting to topic ${socket.myCodeblockId}`)
-      // emits to all sockets:
-      // gIo.emit('chat addMsg', msg)
-      // emits only to sockets in the same room
-      gIo.to(socket.myCodeblockId).emit('update-board', board)
-    })
-    // socket.on('user-watch', userId => {
-    //     logger.info(`user-watch from socket [id: ${socket.id}], on user ${userId}`)
-    //     socket.join('watching:' + userId)
 
-    // })
     socket.on('set-user-socket', (userId) => {
       logger.info(`Setting socket.userId = ${userId} for socket [id: ${socket.id}]`)
       socket.userId = userId
-    })
-    // socket.on('unset-user-socket', () => {
-    //     logger.info(`Removing socket.userId for socket [id: ${socket.id}]`)
-    //     delete socket.userId
-    // })
-    socket.on('update-board', (board) => {
-      logger.info(`setting update board for socket [id: ${socket.id}]`)
-      broadcast({
-        type: 'update-board',
-        data: board,
-        room: socket.myCodeblockId,
-        userId: user._id,
-      })
     })
   })
 }
@@ -73,24 +51,6 @@ async function broadcast({ type, data, room = null, userId }) {
   }
 }
 
-function emitTo({ type, data, label }) {
-  if (label) gIo.to('watching:' + label.toString()).emit(type, data)
-  else gIo.emit(type, data)
-}
-
-async function emitToUser({ type, data, userId }) {
-  userId = userId.toString()
-  const socket = await _getUserSocket(userId)
-
-  if (socket) {
-    logger.info(`Emiting event: ${type} to user: ${userId} socket [id: ${socket.id}]`)
-    socket.emit(type, data)
-  } else {
-    logger.info(`No active socket for user: ${userId}`)
-    // _printSockets()
-  }
-}
-
 async function _getUserSocket(userId) {
   const sockets = await _getAllSockets()
   const socket = sockets.find((s) => s.userId === userId)
@@ -102,22 +62,9 @@ async function _getAllSockets() {
   return sockets
 }
 
-async function _printSockets() {
-  const sockets = await _getAllSockets()
-  console.log(`Sockets: (count: ${sockets.length}):`)
-  sockets.forEach(_printSocket)
-}
-function _printSocket(socket) {
-  console.log(`Socket - socketId: ${socket.id} userId: ${socket.userId}`)
-}
-
 module.exports = {
   // set up the sockets service and define the API
   setupSocketAPI,
-  // emit to everyone / everyone in a specific room (label)
-  emitTo,
-  // emit to a specific user (if currently active in system)
-  emitToUser,
   // Send to all sockets BUT not the current socket - if found
   // (otherwise broadcast to a room / to all)
   broadcast,

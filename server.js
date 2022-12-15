@@ -41,7 +41,7 @@ app.use('/api/session', sessionRoutes)
 setupSocketAPI(http)
 
 // Make every server-side-route to match the index.html
-// so when requesting http://localhost:3030/index.html/board/123 it will still respond with
+// so when requesting http://localhost:3030/index.html/codeblock/123 it will still respond with
 // our SPA (single page app) (the index.html file) and allow vue-router to take it from there
 const port = process.env.PORT || 3030
 app.get('/**', (req, res) => {

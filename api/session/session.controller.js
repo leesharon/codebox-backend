@@ -1,10 +1,6 @@
 const logger = require("../../services/logger.service")
 const sessionService = require("./session.service.js")
 
-module.exports = {
-    add
-}
-
 async function add(req, res) {
     try {
         const session = req.body
@@ -16,3 +12,5 @@ async function add(req, res) {
         res.status(500).send({ err: "Failed to add session" })
     }
 }
+
+module.exports = { add }

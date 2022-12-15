@@ -1,3 +1,3 @@
 module.exports = {
-  dbURL: `mongodb+srv://frelloADMIN:frelloADMIN@frellodb.iypqt4w.mongodb.net/?retryWrites=true&w=majority`,
+  dbURL: `mongodb+srv://codeboxADMIN:codeboxADMIN@cluster0.jzewuvd.mongodb.net/?retryWrites=true&w=majority`
 }

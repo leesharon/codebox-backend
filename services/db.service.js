@@ -1,14 +1,8 @@
 const MongoClient = require('mongodb').MongoClient
-
 const config = require('../config')
-
-module.exports = {
-    getCollection
-}
 
 // Database Name
 const dbName = 'codebox_db'
-
 var dbConn = null
 
 async function getCollection(collectionName) {
@@ -35,6 +29,4 @@ async function connect() {
     }
 }
 
-
-
-
+module.exports = { getCollection }
