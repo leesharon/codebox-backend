@@ -1,21 +1,21 @@
-This is a [React.js](https://reactjs.org/) project bootstrapped with [`create-react-app`](https://reactjs.org/docs/create-a-new-react-app.html).
+This is a [Node.js](https://nodejs.org/) project.
 
 ## Demo
 
-// add a link here
-// TODO edit all readme
+Here is a link to the [project.](https://codebox-7x7t.onrender.com/#/)
 
 You can use `Cody` as username and `Cody12345` as password to login as a mentor.
 Use `MichaelCohen` & `Michael12345` to login as a student.
 
 ## Features
 
-- [React.js 18](https://reactjs.org/blog/2022/03/29/react-v18.html) - Blog introduce react v18.0.
-- [Typescript 4](https://www.typescriptlang.org/) - Documentation of typescript.
-- [Styled Components](https://styled-components.com/docs) - Documentation of styled components.
+- [Node.js 18](https://nodejs.org/en/docs/) - Documentation of Node.js.
 - [Sockets.IO](https://socket.io/docs/v4/) - Documentation of sockets.IO.
-- [CodeMirror](https://codemirror.net/docs/) - Documentation of CodeMirror.
-- [formik](https://formik.org/docs/overview) - Documentation of formik.
+- [bcrypt](https://github.com/kelektiv/node.bcrypt.js#readme) - bcrypt github repo.
+- [cryptr](https://github.com/pvorb/node-crypt#readme) - cryptr github repo.
+- [MongoDB](https://www.mongodb.com/docs/) - Documentation of MongoDB.
+- [cookie-parser](https://github.com/expressjs/cookie-parser#readme) - cookie-parser github repo.
+- [cors](https://github.com/expressjs/cors#readme) - cors github repo.
 
 ## Usage
 
@@ -24,39 +24,29 @@ This project using node >= 14.19.2 & yarn
 ### Installation
 
 ```bash
-git clone https://github.com/leesharon/codebox-frontend.git
+git clone https://github.com/leesharon/codebox-backend.git
 yarn install
 ```
 
 #### Development
 
 ```bash
-yarn start
+yarn dev
 ```
 
-#### Production
-
-```bash
-yarn build
-yarn start
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `src/App.tsx`. The page auto-updates as you edit the file.
+You can start editing the server by modifying `server.js`. The server auto-updates as you edit the file.
 
 ## Learn More
 
-To learn more about React.js, take a look at the following resources:
+To learn more about Node.js, take a look at the following resources:
 
-- [React.js Documentation](https://reactjs.org/docs/getting-started.html) - learn about Next.js features and API.
-- [Learn React.js](https://reactjs.org/tutorial/tutorial.html) - an interactive React.js tutorial.
+- [Node.js Documentation](https://nodejs.org/en/docs/) - learn about Next.js features and API.
 
-You can check out [the React.js GitHub repository](https://github.com/reactjs) - your feedback and contributions are welcome!
+You can check out [the Node.js GitHub repository](https://github.com/nodejs/node) - your feedback and contributions are welcome!
 
 ## Deploy on Render
 
-This project is deployed with [Render](https://render.com/docs).
+This project is deployed with [Render](https://render.com/docs). A demo is available [here](https://codebox-7x7t.onrender.com/#/).
 
 ---
 
